@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 app_name = 'blog'
 
 urlpatterns = [
-    path('', views.HomePageView.as_view(), name='homepage'),
+
+
 ]
 
 if settings.DEBUG:
