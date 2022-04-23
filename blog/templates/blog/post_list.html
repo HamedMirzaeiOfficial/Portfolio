@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="section-inner custom-page-content">
+    <div class="page-header color-1">
+        <h2>Blog</h2>
+    </div>
+    <div class="page-content">
+
+        <!-- Blog Posts Grid -->
+        <div class="blog-masonry two-columns">
+            <!-- Blog Post 1 -->
+            {% for post in posts %}
+                <div class="item">
+                    <div class="blog-card">
+                        <div class="media-block">
+                            <a href="{{ post.get_absolute_url }}">
+                                <img src="{{ post.image.url }}" class="post-image img-responsive" >
+                                <div class="mask"></div>=
+                                <div class="post-date"><span class="day">{{ post.created_on.day }}</span><span class="month">{{ post.created_on.month }}</span><!--<span class="year">2016</span>--></div>
+                            </a>
+                        </div>
+                        <div class="post-info">
+                            <ul class="category">
+                                <li><a href="#">{{post.category.title}}</a></li>
+                            </ul>
+                              <a href="{{post.get_absolute_url}}"><h4 class="blog-item-title">{{post.title}}</h4></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- End of Blog Post 1 -->
+
+        </div>
+        <!-- Blog Posts Grid -->
+    </div>
+</div>
+{% endblock %}

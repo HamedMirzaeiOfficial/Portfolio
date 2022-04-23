@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedManager, self).get_queryset().filter(activate=True)
+        return super(PublishedManager, self).get_queryset().filter(active=True)
 
 
 class Category(models.Model):
@@ -23,7 +23,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=300)
     slug = models.SlugField(max_length=250, unique_for_date='created_on')
-    image = models.ImageField(upload_to='image')
+    image = models.ImageField(upload_to='images/')
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
@@ -42,7 +42,7 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-            super(Post, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
@@ -59,7 +59,9 @@ class Comment(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comments')
     active = models.BooleanField(default=True)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
+
+    objects = models.Manager()  # The default manager.
+    published = PublishedManager()  # Our custom manager.
 
     class Meta:
         ordering = ('-created_on', )

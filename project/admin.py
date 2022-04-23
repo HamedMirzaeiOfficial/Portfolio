@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Project
+from .models import Project, CategoryProject
+
+
+@admin.register(CategoryProject)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'created_on', 'last_modified')
+    list_filter = ('created_on', 'last_modified')
 
 
 @admin.register(Project)

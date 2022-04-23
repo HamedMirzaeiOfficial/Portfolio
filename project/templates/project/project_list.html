@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="section-inner custom-page-content">
+    <div class="page-header color-1">
+        <h2>Portfolio</h2>
+    </div>
+    <div class="page-content">
+
+        <div class="blog-masonry two-columns">
+            {% for project in projects %}
+                <div class="item">
+                    <div class="blog-card">
+                        <div class="media-block">
+                            <a href="{{ project.get_absolute_url }}">
+                                <img class="post-image img-responsive" src="{{ project.image.url }}" />
+                                <div class="mask"></div>
+                                <div class="post-date"><span class="day">{{ project.created_on.day }}</span><span class="month">{{ project.created_on.month }}</span><!--<span class="year">2016</span>--></div>
+                            </a>
+                        </div>
+                        <div class="post-info">
+                            <ul class="category">
+                                <li><a href="#">{{ project.category.title }}</a></li>
+                            </ul>
+                              <a href="{{post.get_absolute_url}}"><h4 class="blog-item-title">{{ project.title }}</h4></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
