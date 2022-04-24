@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block content %}
 
@@ -17,7 +18,7 @@
                     <div class="blog-card">
                         <div class="media-block">
                             <a href="{{ post.get_absolute_url }}">
-                                <img src="{{ post.image.url }}" class="post-image img-responsive" >
+                                <img src="{% thumbnail post.image 400x0 %}" class="post-image img-responsive" style="height:340px">
                                 <div class="mask"></div>=
                                 <div class="post-date"><span class="day">{{ post.created_on.day }}</span><span class="month">{{ post.created_on.month }}</span><!--<span class="year">2016</span>--></div>
                             </a>

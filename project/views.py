@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.shortcuts import reverse
 from django.views import View
@@ -61,6 +62,7 @@ class ProjectComment(SingleObjectMixin, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
+        messages.success(self.request, "A comment has been sent.")
         return reverse('project:project_detail', kwargs={'year': self.object.created_on.year,
                                                          'month': self.object.created_on.month,
                                                          'day': self.object.created_on.day,

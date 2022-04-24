@@ -2,13 +2,20 @@
 {% load static %}
 
 {% block content %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="text-center alert alert-{{ message.tags }}">
+        {{ message|safe }}
+      </div>
+    {% endfor %}
+  {% endif %}
 <!-- Single Page Content -->
         <div class="single-page-content">
           <div class="content-area">
             <div class="page-content">
               <!-- Blog Entry Content -->
               <div class="blog-post-main-image">
-                <img class="post-image img-responsive" src="images/blog/blog_post_2_full.jpg" alt="blog-post-1" />
+                <img src="{{ post.image.url }}" class="post-image img-responsive"  style="min-height: 400px; min-width: 400px;">
               </div>
 
               <div class="blog-post-content">
@@ -43,7 +50,7 @@
 
                 <div class="post-comments">
                   <div class="block-title">
-                    <h3>{{ post.comments.count }}</h3>
+                    <h3>comment{{post.comments.count|pluralize}} ({{ post.comments.count }})</h3>
                   </div>
 
                   <div class="media">

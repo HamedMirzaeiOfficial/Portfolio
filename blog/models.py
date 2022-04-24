@@ -85,6 +85,10 @@ class Advertise(models.Model):
         return self.title
 
 
-
+class Contact(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
 
 

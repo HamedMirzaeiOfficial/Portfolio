@@ -1,12 +1,21 @@
-from django.forms import ModelForm
+from django import forms
 from django.core.exceptions import ValidationError
 from .models import Comment
 
 
-class CommentForm(ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['name', 'email', 'body']
+
+        labels = {
+            'body': 'Message',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your name...'}),
+            'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email...'}),
+            'body': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your message...'})
+        }
 
     def __init__(self, *args, **kwargs):
         """Save the request with the form so it can be accessed in clean_*()"""
@@ -19,3 +28,5 @@ class CommentForm(ModelForm):
         if not self.request.user.is_authenticated and data.lower().strip() == 'hamed mirzaei':
             raise ValidationError("Sorry, you cannot use this name.")
         return data
+
+

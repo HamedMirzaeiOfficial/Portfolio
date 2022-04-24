@@ -26,7 +26,7 @@ urlpatterns = [
     path('services/', blog_views.ServicesView.as_view(), name='services'),
     path('portfolio/', include('project.urls')),
     path('blog/', include('blog.urls')),
-    path('contact/', blog_views.ContactView.as_view(), name='contact'),
+    path('contact/', blog_views.ContactCreate.as_view(), name='contact'),
 
 ]
 if settings.DEBUG:

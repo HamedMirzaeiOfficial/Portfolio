@@ -1,9 +1,11 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import reverse
-from .models import Post
+from .models import Post, Contact
 from django.views.generic import ListView, DetailView, TemplateView, FormView, View
-from .forms import CommentForm
+from .forms import CommentForm, ContactForm
 from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.edit import CreateView
+from django.contrib import messages
 
 
 class PostListView(ListView):
@@ -41,9 +43,8 @@ class PostComment(SingleObjectMixin, FormView):
     template_name = 'blog/post_detail.html'
 
     def post(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return HttpResponseForbidden()
-
+        # if not request.user.is_authenticated:
+        #     return HttpResponseForbidden()
         self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
@@ -59,13 +60,7 @@ class PostComment(SingleObjectMixin, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        # post = self.get_object()
-        # return reverse('blog:post_detail', kwargs={'year': post.created_on.year,
-        #                                            'month': post.created_on.month,
-        #                                            'day': post.created_on.day,
-        #                                            'slug': post.slug}) + '#comments'
-        #
-
+        messages.success(self.request, "A comment has been sent.")
         return reverse('blog:post_detail', kwargs={'year': self.object.created_on.year,
                                                    'month': self.object.created_on.month,
                                                    'day': self.object.created_on.day,
@@ -92,5 +87,11 @@ class BlogView(TemplateView):
     template_name = 'blog.html'
 
 
-class ContactView(TemplateView):
+class ContactCreate(CreateView):
+    model = Contact
     template_name = 'contact.html'
+    form_class = ContactForm
+
+    def get_success_url(self):
+        messages.success(self.request, "The message was sent to the admin.")
+        return reverse("contact")

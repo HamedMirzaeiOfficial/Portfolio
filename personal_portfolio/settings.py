@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'project.apps.ProjectConfig',
+    # To reduce the quality of photos
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
