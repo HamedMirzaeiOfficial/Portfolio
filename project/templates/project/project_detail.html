@@ -27,7 +27,7 @@
                   <span class="divider">|</span>
                   <span class="autor"><a href="#"><i class="fa fa-fw fa-user"></i>Hamed Mirzaei</a></span>
                   <span class="divider">|</span>
-                  <span class="category"><a href="#"><i class="fa fa-fw fa-folder"></i>{{ project.category.name }}</a></span>
+                  <span class="category"><a href="{% url 'project:project_list_by_category' project.category %}"><i class="fa fa-fw fa-folder"></i>{{ project.category.name }}</a></span>
                 </div>
                   <p>{{ project.body }}</p>
 
@@ -40,13 +40,13 @@
                     <a href="#" target="_blank" class="btn"><i class="fa fa-dribbble"></i> </a>
                   </div>
                   <!-- /Share Buttons -->
-                  <ul class="tags">
-                    <li><a>HTML5</a></li>
-                    <li><a>CSS3</a></li>
-                    <li><a>jQuery</a></li>
-                    <li><a>Ajax</a></li>
-                    <li><a>PHP5</a></li>
-                  </ul>
+<!--                  <ul class="tags">-->
+<!--                    <li><a>HTML5</a></li>-->
+<!--                    <li><a>CSS3</a></li>-->
+<!--                    <li><a>jQuery</a></li>-->
+<!--                    <li><a>Ajax</a></li>-->
+<!--                    <li><a>PHP5</a></li>-->
+<!--                  </ul>-->
                 </div>
 
                 <div class="post-comments">

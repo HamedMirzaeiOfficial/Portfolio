@@ -40,5 +40,8 @@ class ContactForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email...'}),
             'body': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your message...'})
         }
+        labels = {
+            'body': 'Message',
+        }
 
 

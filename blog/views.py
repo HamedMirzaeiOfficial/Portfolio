@@ -15,6 +15,15 @@ class PostListView(ListView):
     queryset = Post.published.all()
 
 
+class PostListByCategoryView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.published.filter(category__name=self.kwargs['slug'])
+
+
 class PostDetailView(View):
 
     def get(self, request, *args, **kwargs):

@@ -16,6 +16,15 @@ class ProjectListView(ListView):
     queryset = Project.published.all()
 
 
+class ProjectListByCategory(ListView):
+    model = Project
+    template_name = 'project/project_list.html'
+    context_object_name = 'projects'
+
+    def get_queryset(self):
+        return Project.published.filter(category__name=self.kwargs['slug'])
+
+
 class ProjectDetailView(View):
 
     def get(self, request, *args, **kwargs):
