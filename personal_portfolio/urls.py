@@ -22,14 +22,18 @@ from blog import views as blog_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
     path('', blog_views.HomeView.as_view(), name='home'),
     path('resume/', blog_views.ResumeView.as_view(), name='resume'),
     path('services/', blog_views.ServicesView.as_view(), name='services'),
     path('portfolio/', include('project.urls')),
     path('blog/', include('blog.urls')),
     path('contact/', blog_views.ContactCreate.as_view(), name='contact'),
+    # adding login/logout section to pages
+    path('api/auth/', include('rest_framework.urls'))
+
 
 ]
 if settings.DEBUG:
- urlpatterns += static(settings.MEDIA_URL,
- document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
