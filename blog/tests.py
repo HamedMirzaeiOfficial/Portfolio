@@ -28,10 +28,6 @@ class TestHomeView(TestCase):
 
 
 class TestDjangoSettings(TestCase):
-    """
-    These tests use `StaticLiveServerTestCase` and `urlopen` since the normal `TestCase` uses a special server that does
-    not serve static assets.
-    """
 
     def test_django_conf(self):
         """
