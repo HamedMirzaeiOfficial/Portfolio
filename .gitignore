@@ -143,3 +143,4 @@ config.py
 
 
 ../media/*
+.idea/

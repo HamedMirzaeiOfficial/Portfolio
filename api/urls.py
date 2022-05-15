@@ -2,15 +2,6 @@ from django.urls import path
 from . import views
 from rest_framework.routers import SimpleRouter
 
-# urlpatterns = [
-#     path('posts/', views.PostList.as_view()),
-#     path('posts/<int:pk>/', views.PostDetail.as_view()),
-#     path('categories/', views.CategoryList.as_view()),
-#     path('category/<int:pk>/', views.CategoryDetail.as_view())
-#
-# ]
-
-
 """ using  routers, because we have a lot of duplicate code in views and than change it to viewset """
 
 router = SimpleRouter()

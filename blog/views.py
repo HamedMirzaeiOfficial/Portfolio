@@ -1,4 +1,3 @@
-from django.http import HttpResponseForbidden
 from django.shortcuts import reverse
 from .models import Post, Contact
 from django.views.generic import ListView, DetailView, TemplateView, FormView, View
@@ -52,8 +51,6 @@ class PostComment(SingleObjectMixin, FormView):
     template_name = 'blog/post_detail.html'
 
     def post(self, request, *args, **kwargs):
-        # if not request.user.is_authenticated:
-        #     return HttpResponseForbidden()
         self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
